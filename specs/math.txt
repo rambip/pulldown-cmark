@@ -1,0 +1,81 @@
+This is very early work on the future math spec.
+
+# Base
+
+They are only two kind of math expressions: block level and inline level.
+
+## inline level
+
+Inline level math can only span one single line.
+
+```````````````````````````````` example
+$x=1$
+.
+<p><span class="math-inline">x=1</span></p>
+````````````````````````````````
+
+## block level
+
+Block level math can span multiple lines
+
+```````````````````````````````` example
+
+$$x=1$$
+.
+<p><span class="math-block">x=1</span></p>
+````````````````````````````````
+
+# Priority
+
+```````````````````````````````` example
+`$this should not be converted into math$`
+.
+<p><pre>`$this should not be converted into math$`</pre></p>
+````````````````````````````````
+
+
+# Ambiguous cases
+
+```````````````````````````````` example
+math
+$$x$$
+````````````````````````````````
+
+Is x inside a math block ?
+
+```````````````````````````````` example
+$ x=1 $
+````````````````````````````````
+
+Is "x=1" inside a math inline ?
+
+
+```````````````````````````````` example
+$$
+x=
+
+1
+$$
+````````````````````````````````
+Is this a math block ?
+
+
+```````````````````````````````` example
+That costs between $100 and $200.
+````````````````````````````````
+
+Is "100 and " inside a math inline ?
+
+# Need review
+
+## Name of the css class
+Some people proposed `class="math inline"`, but it is quite arbitrary.
+- Github uses `js-inline-math`
+- stackedit uses `katex--inline`
+- mdbook uses `MathJax_Display`
+
+The class should probably be one single identifier, and mentioning neither `katex` or `mathjax`, 
+since those are specific rendering frameworks.
+
+Since it based on the `tex` language, it could make sense to use it in the name of the class.
+
